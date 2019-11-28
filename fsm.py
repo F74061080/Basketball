@@ -1,6 +1,9 @@
 from transitions.extensions import GraphMachine
 
 from utils import send_text_message
+from linebot import *
+
+LineBotApi = LineBotApi("nAOGBdhTa49RFIeaNBZzwFidsSGSd75vgCTo9lkhfndEsG2n58/CPw+oxHqqGMaplpxEzLDGhVtl2J9Hv4MLVbO/erT2WdA5pH0//GzukgUAhvAfxLUAFugC6tG2FNIQuOZJMiu9g8SHRid6yV6zKgdB04t89/1O/w1cDnyilFU=")
 
 
 class TocMachine(GraphMachine):
@@ -20,7 +23,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state1")
-        self.go_back()
+        #self.go_back()
 
     def on_exit_state1(self):
         print("Leaving state1")
@@ -30,7 +33,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state2")
-        self.go_back()
+        #self.go_back()
 
     def on_exit_state2(self):
         print("Leaving state2")
