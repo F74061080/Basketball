@@ -9,6 +9,8 @@ LineBotApi = LineBotApi("nAOGBdhTa49RFIeaNBZzwFidsSGSd75vgCTo9lkhfndEsG2n58/CPw+
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
+        reply_token = reply_token
+        LineBotApi.push_message(reply_token, "請輸入:go to state 1")
 
     def is_going_to_state1(self, event):
         text = event.message.text
@@ -38,6 +40,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state2")
         #self.go_back()
+        self.
 
     def on_exit_state2(self,event):
         print("Leaving state2")
@@ -47,7 +50,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state3")
-        self.go_back()
+        
         
 
     def on_exit_state3(self, event):
