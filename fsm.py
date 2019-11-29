@@ -31,6 +31,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_text_message(reply_token, "Enter a Country")
+        print("also Start to choose")
         #self.go_back()
 
     def on_exit_start(self, event):
