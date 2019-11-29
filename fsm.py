@@ -12,11 +12,11 @@ class TocMachine(GraphMachine):
 
     def is_going_to_start(self, event):
         text = event.message.text
-        return text.lower() != ""
+        return text.lower() != "go"
 
     def is_going_to_tainan(self, event):
         text = event.message.text
-        return text.lower() == "go"
+        return text.lower() == "Tainan"
 
     def is_going_to_taichung(self, event):
         text = event.message.text
