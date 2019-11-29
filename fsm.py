@@ -37,7 +37,7 @@ class TocMachine(GraphMachine):
         message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
-                thumbnail_image_url='S__26632198.jpg',
+                #thumbnail_image_url='S__26632198.jpg',
                 title='Menu',
                 text='Please select',
                 actions=[
