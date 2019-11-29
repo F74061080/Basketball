@@ -3,6 +3,7 @@ from transitions.extensions import GraphMachine
 from utils import send_text_message
 from linebot import *
 from linebot.models.send_messages import TextSendMessage
+from linebot.models.template import ButtonsTemplate, TemplateSendMessage
 
 line_bot_api = LineBotApi("nAOGBdhTa49RFIeaNBZzwFidsSGSd75vgCTo9lkhfndEsG2n58/CPw+oxHqqGMaplpxEzLDGhVtl2J9Hv4MLVbO/erT2WdA5pH0//GzukgUAhvAfxLUAFugC6tG2FNIQuOZJMiu9g8SHRid6yV6zKgdB04t89/1O/w1cDnyilFU=")
 handler = WebhookHandler("de0f32226af4c2988cfafed82ecd3ff5")    
@@ -30,7 +31,32 @@ class TocMachine(GraphMachine):
     def on_enter_start(self, event):
         print("Start to choose")
 
-        message = TextSendMessage(text='Enter a Country')
+        #message = TextSendMessage(text='Enter a Country')
+
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://example.com/image.jpg',
+                title='Menu',
+                text='Please select',
+                actions=[
+                    PostbackTemplateAction(
+                        label='postback',
+                        text='postback text',
+                        data='action=buy&itemid=1'
+                    ),
+                    MessageTemplateAction(
+                        label='message',
+                        text='message text'
+                    ),
+                    URITemplateAction(
+                        label='uri',
+                        uri='http://example.com/'
+                    )
+                ]
+            )
+)
+    
         line_bot_api.reply_message(event.reply_token, message)
         #self.go_back()
 
