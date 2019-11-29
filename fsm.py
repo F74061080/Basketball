@@ -23,7 +23,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_state3(self, event):
         text = event.message.text
-        return text.lower() == "go to state3"
+        return text.lower() == "state3"
 
     def on_enter_start(self, event):
         print("Start to choose")
