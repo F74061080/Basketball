@@ -14,13 +14,13 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "go"
 
-    def is_going_to_Tainan(self, event):
+    def is_going_to_tainan(self, event):
         text = event.message.text
-        return text.lower() == "Tainan"
+        return text.lower() == "tainan"
 
-    def is_going_to_Taichung(self, event):
+    def is_going_to_taichung(self, event):
         text = event.message.text
-        return text.lower() == "Taichung"
+        return text.lower() == "taichung"
 
     def is_going_to_state3(self, event):
         text = event.message.text
@@ -37,18 +37,18 @@ class TocMachine(GraphMachine):
         print("Entering Country")
 
 
-    def on_enter_Tainan(self, event):
+    def on_enter_tainan(self, event):
         print("I'm entering tainan")
 
         reply_token = event.reply_token
         send_text_message(reply_token, "Now in tainan")
         #self.go_back()
 
-    def on_exit_Tainan(self, event):
+    def on_exit_tainan(self, event):
         print("Leaving tainan")
 
 
-    def on_enter_Taichung(self, event):
+    def on_enter_taichung(self, event):
         print("I'm entering taichung")
 
         reply_token = event.reply_token
@@ -56,7 +56,7 @@ class TocMachine(GraphMachine):
         #self.go_back()
 
 
-    def on_exit_Taichung(self,event):
+    def on_exit_taichung(self,event):
         print("Leaving taichung")
 
 
