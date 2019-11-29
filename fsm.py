@@ -12,7 +12,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_start(self, event):
         text = event.message.text
-        return text.lower() != "go"
+        return text.lower() == "go"
 
     def is_going_to_tainan(self, event):
         text = event.message.text
