@@ -3,8 +3,8 @@ from transitions.extensions import GraphMachine
 from utils import send_text_message
 from linebot import *
 
-LineBotApi = LineBotApi("nAOGBdhTa49RFIeaNBZzwFidsSGSd75vgCTo9lkhfndEsG2n58/CPw+oxHqqGMaplpxEzLDGhVtl2J9Hv4MLVbO/erT2WdA5pH0//GzukgUAhvAfxLUAFugC6tG2FNIQuOZJMiu9g8SHRid6yV6zKgdB04t89/1O/w1cDnyilFU=")
-
+line_bot_api = LineBotApi("nAOGBdhTa49RFIeaNBZzwFidsSGSd75vgCTo9lkhfndEsG2n58/CPw+oxHqqGMaplpxEzLDGhVtl2J9Hv4MLVbO/erT2WdA5pH0//GzukgUAhvAfxLUAFugC6tG2FNIQuOZJMiu9g8SHRid6yV6zKgdB04t89/1O/w1cDnyilFU=")
+handler = WebhookHandler("de0f32226af4c2988cfafed82ecd3ff5")    
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -30,7 +30,9 @@ class TocMachine(GraphMachine):
         print("Start to choose")
 
         reply_token = event.reply_token
-        send_text_message(reply_token, "Enter a Country")
+        #send_text_message(reply_token, "Enter a Country")
+  
+        line_bot_api.reply_message(reply_token, "Enter a Country")
         #self.go_back()
 
     def on_exit_start(self, event):
@@ -54,7 +56,6 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "Now in taichung")
         #self.go_back()
-
 
     def on_exit_taichung(self,event):
         print("Leaving taichung")
