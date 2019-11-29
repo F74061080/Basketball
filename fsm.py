@@ -37,23 +37,18 @@ class TocMachine(GraphMachine):
         message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
-                #thumbnail_image_url='S__26632198.jpg',
-                title='Menu',
+                title='選擇城市',
                 text='Please select',
                 actions=[
-                    PostbackAction(
-                        label='postback',
-                        text='postback text',
-                        data='action=buy&itemid=1'
+                    MessageAction(
+                        label='Tainan',
+                        text='tainan'
                     ),
                     MessageAction(
-                        label='message',
-                        text='message text'
+                        label='Taichung',
+                        text='taichung'
                     ),
-                    URIAction(
-                        label='uri',
-                        uri='http://example.com/'
-                    )
+                    
                 ]
             )
 )
