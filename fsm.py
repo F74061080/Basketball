@@ -30,8 +30,6 @@ class TocMachine(GraphMachine):
     def on_enter_start(self, event):
         print("Start to choose")
 
-        reply_token = event.reply_token
-        #send_text_message(reply_token, "Enter a Country")
         message = TextSendMessage(text='Enter a Country')
         line_bot_api.reply_message(event.reply_token, message)
         #self.go_back()
