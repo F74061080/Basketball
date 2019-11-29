@@ -22,9 +22,9 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "taichung"
 
-    def is_going_to_state3(self, event):
+    def is_going_to_exit(self, event):
         text = event.message.text
-        return text.lower() == "state3"
+        return text.lower() == "exit"
 
     def on_enter_start(self, event):
         print("Start to choose")
@@ -60,12 +60,12 @@ class TocMachine(GraphMachine):
         print("Leaving taichung")
 
 
-    def on_enter_state3(self, event):
+    def on_enter_exit(self, event):
         print("I'm entering state3")
 
         reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger state3")
+        send_text_message(reply_token, "Now exit")
         self.go_back()
 
-    def on_exit_state3(self):
+    def on_exit_exit(self):
         print("Leaving state3")
