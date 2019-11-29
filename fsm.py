@@ -37,6 +37,7 @@ class TocMachine(GraphMachine):
         message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
+                thumbnail_image_url='https://imgur.com/q2soQy5',
                 title='選擇城市',
                 text='Please select',
                 actions=[
@@ -48,10 +49,9 @@ class TocMachine(GraphMachine):
                         label='Taichung',
                         text='taichung'
                     ),
-                    
                 ]
             )
-)
+        )
     
         line_bot_api.reply_message(event.reply_token, message)
         #self.go_back()
