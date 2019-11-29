@@ -11,7 +11,8 @@ class TocMachine(GraphMachine):
         self.machine = GraphMachine(model=self, **machine_configs)
 
     def is_going_to_start(self, event):
-        return 1
+        text = event.message.text
+        return text.lower() != ""
 
     def is_going_to_tainan(self, event):
         text = event.message.text
