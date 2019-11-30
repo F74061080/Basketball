@@ -16,24 +16,31 @@ class TocMachine(GraphMachine):
     def is_going_to_start(self, event):
         text = event.message.text
         return text.lower() == "go"
-
     def is_going_to_tainan(self, event):
         text = event.message.text
         return text.lower() == "tainan"
-
     def is_going_to_taichung(self, event):
         text = event.message.text
         return text.lower() == "taichung"
-
+    def is_going_to_tainan_view(self, event):
+        text = event.message.text
+        return text.lower() == "tainan_view"
+    def is_going_to_tainan_food(self, event):
+        text = event.message.text
+        return text.lower() == "tainan_food"
+    def is_going_to_taichung_view(self, event):
+        text = event.message.text
+        return text.lower() == "taichung_view"
+    def is_going_to_taichung_food(self, event):
+        text = event.message.text
+        return text.lower() == "taichung_food"
     def is_going_to_exit(self, event):
         text = event.message.text
         return text.lower() == "exit"
 
     def on_enter_start(self, event):
         print("Start to choose")
-
         #message = TextSendMessage(text='Enter a Country')
-
         message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
@@ -52,13 +59,10 @@ class TocMachine(GraphMachine):
                 ]
             )
         )
-    
         line_bot_api.reply_message(event.reply_token, message)
         #self.go_back()
-
     def on_exit_start(self, event):
         print("Entering Country")
-
 
     def on_enter_tainan(self, event):
         print("I'm entering tainan")
@@ -75,11 +79,11 @@ class TocMachine(GraphMachine):
                 actions=[
                     MessageAction(
                         label='景點',
-                        text='Exit'
+                        text='tainan_view'
                     ),
                     MessageAction(
                         label='美食',
-                        text='Exit'
+                        text='tainan_food'
                     ),
                 ]
             )
@@ -88,10 +92,8 @@ class TocMachine(GraphMachine):
         line_bot_api.reply_message(event.reply_token, message)
 
         #self.go_back()
-
     def on_exit_tainan(self, event):
         print("Leaving tainan")
-
 
     def on_enter_taichung(self, event):
         print("I'm entering taichung")
@@ -108,11 +110,11 @@ class TocMachine(GraphMachine):
                 actions=[
                     MessageAction(
                         label='景點',
-                        text='Exit'
+                        text='taichung_view'
                     ),
                     MessageAction(
                         label='美食',
-                        text='Exit'
+                        text='taichung_food'
                     ),
                 ]
             )
@@ -121,9 +123,37 @@ class TocMachine(GraphMachine):
         line_bot_api.reply_message(event.reply_token, message)
 
         #self.go_back()
-
     def on_exit_taichung(self,event):
         print("Leaving taichung")
+
+    def on_enter_tainan_food(self, event):
+        print("I'm entering tainan")
+
+        #reply_token = event.reply_token
+        #send_text_message(reply_token, "Now in tainan")
+
+        message = TextSendMessage(text='It is delicious in Taichung!!')
+    
+        line_bot_api.reply_message(event.reply_token, message)
+
+        #self.go_back()
+    def on_exit_tainan_food(self, event):
+        print("Leaving tainan")
+
+    def on_enter_tainan_view(self, event):
+        print("I'm entering tainan")
+
+        #reply_token = event.reply_token
+        #send_text_message(reply_token, "Now in tainan")
+
+        message = TextSendMessage(text='It is delicious in Tainan!!')
+    
+        line_bot_api.reply_message(event.reply_token, message)
+
+        #self.go_back()
+    def on_exit_tainan_view(self, event):
+        print("Leaving tainan")
+
 
 
     def on_enter_exit(self, event):
@@ -132,6 +162,5 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "Now exit")
         self.go_back()
-
     def on_exit_exit(self):
         print("Leaving state3")

@@ -14,7 +14,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "start", "tainan", "taichung", "exit"],
+    states=["user", "start", "tainan", "taichung", "tainan_view", "tainan_food", "taichung_view", "taichung_food",  "exit"],
     transitions=[
         {
             "trigger": "advance", 
@@ -36,12 +36,39 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["tainan", "taichung"],
+            "source": "tainan",
+            "dest": "tainan_view",
+            "conditions": "is_going_to_tainan_view",
+        },
+        {
+            "trigger": "advance",
+            "source": "tainan",
+            "dest": "tainan_food",
+            "conditions": "is_going_to_tainan_food",
+        },
+        {
+            "trigger": "advance",
+            "source": "taichung",
+            "dest": "taichung_view",
+            "conditions": "is_going_to_taichung_view",
+        },
+        {
+            "trigger": "advance",
+            "source": "taichung",
+            "dest": "taichung_food",
+            "conditions": "is_going_to_taichung_food",
+        },
+        {
+            "trigger": "advance",
+            "source": ["tainan", "taichung", "tainan_view", "tainan_food", "taichung_view", "taichung_food"],
             "dest": "exit",
             "conditions": "is_going_to_exit",
         },
-
-        {"trigger": "go_back", "source": ["start", "tainan", "taichung", "exit"], "dest": "user"},
+        {
+            "trigger": "go_back",
+            "source": ["start", "tainan", "taichung", "tainan_view", "tainan_food", "taichung_view", "taichung_food", "exit"],
+            "dest": "user"
+        },
     ],
     initial="user",
     auto_transitions=False,
