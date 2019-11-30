@@ -7,180 +7,79 @@ from linebot.models.template import ButtonsTemplate, TemplateSendMessage
 from linebot.models.actions import MessageAction, PostbackAction, URIAction
 
 line_bot_api = LineBotApi("nAOGBdhTa49RFIeaNBZzwFidsSGSd75vgCTo9lkhfndEsG2n58/CPw+oxHqqGMaplpxEzLDGhVtl2J9Hv4MLVbO/erT2WdA5pH0//GzukgUAhvAfxLUAFugC6tG2FNIQuOZJMiu9g8SHRid6yV6zKgdB04t89/1O/w1cDnyilFU=")
-handler = WebhookHandler("de0f32226af4c2988cfafed82ecd3ff5")    
+handler = WebhookHandler("de0f32226af4c2988cfafed82ecd3ff5")   
+
+class player():
+    def __init__(self, num):
+        self.number = num
+        self.two_made   = 0
+        self.two_miss   = 0
+        self.three_made = 0
+        self.three_miss = 0
+        self.free_made  = 0
+        self.free_miss  = 0
+        self.ORebound   = 0
+        self.DRebound   = 0
+        self.assist     = 0
+        self.steal      = 0
+        self.block      = 0
+        self.error      = 0
+        self.foul       = 0
+
+player_num = []
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
 
-    def is_going_to_start(self, event):
+    def is_going_to_enter_player(self, event):
         text = event.message.text
-        return text.lower() == "go"
-    def is_going_to_tainan(self, event):
+        return text.lower() == "start"
+    def is_going_to_add_player(self, event):
         text = event.message.text
-        return text.lower() == "tainan"
-    def is_going_to_taichung(self, event):
-        text = event.message.text
-        return text.lower() == "taichung"
-    def is_going_to_tainan_view(self, event):
-        text = event.message.text
-        return text.lower() == "tainan_view"
-    def is_going_to_tainan_food(self, event):
-        text = event.message.text
-        return text.lower() == "tainan_food"
-    def is_going_to_taichung_view(self, event):
-        text = event.message.text
-        return text.lower() == "taichung_view"
-    def is_going_to_taichung_food(self, event):
-        text = event.message.text
-        return text.lower() == "taichung_food"
+        return text.lower() == "add_player"
     def is_going_to_exit(self, event):
         text = event.message.text
         return text.lower() == "exit"
 
-    def on_enter_start(self, event):
+    def on_enter_enter_player(self, event):
         print("Start to choose")
-        #message = TextSendMessage(text='Enter a Country')
+        #message = TextSendMessage(text='Enter player number')
+        #line_bot_api.reply_message(event.reply_token, message)
         message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
-                thumbnail_image_url='https://i.imgur.com/q2soQy5.jpg',
-                title='選擇城市',
+                title='安安你好',
                 text='Please select',
                 actions=[
                     MessageAction(
-                        label='Tainan',
-                        text='tainan'
+                        label='增加球員',
+                        text='add_player'
                     ),
                     MessageAction(
-                        label='Taichung',
-                        text='taichung'
+                        label='開始比賽',
+                        text='game'
                     ),
                 ]
             )
         )
-        line_bot_api.reply_message(event.reply_token, message)
-        #self.go_back()
-    def on_exit_start(self, event):
-        print("Entering Country")
+        line_bot_api.reply_message(event.reply_token, message)   
+    def on_exit_enter_player(self, event):
+        print("exit_enter_player")
 
-    def on_enter_tainan(self, event):
-        print("I'm entering tainan")
-
-        #reply_token = event.reply_token
-        #send_text_message(reply_token, "Now in tainan")
-
-        message = TemplateSendMessage(
-            alt_text='Buttons template',
-            template=ButtonsTemplate(
-                thumbnail_image_url='https://i.imgur.com/q2soQy5.jpg',
-                title='選擇台南服務',
-                text='Please select',
-                actions=[
-                    MessageAction(
-                        label='景點',
-                        text='tainan_view'
-                    ),
-                    MessageAction(
-                        label='美食',
-                        text='tainan_food'
-                    ),
-                ]
-            )
-        )
-    
-        line_bot_api.reply_message(event.reply_token, message)
-
-        #self.go_back()
-    def on_exit_tainan(self, event):
-        print("Leaving tainan")
-
-    def on_enter_taichung(self, event):
-        print("I'm entering taichung")
-
-        #reply_token = event.reply_token
-        #send_text_message(reply_token, "Now in taichung")
-
-        message = TemplateSendMessage(
-            alt_text='Buttons template',
-            template=ButtonsTemplate(
-                thumbnail_image_url='https://i.imgur.com/q2soQy5.jpg',
-                title='選擇台中服務',
-                text='Please select',
-                actions=[
-                    MessageAction(
-                        label='景點',
-                        text='taichung_view'
-                    ),
-                    MessageAction(
-                        label='美食',
-                        text='taichung_food'
-                    ),
-                ]
-            )
-        )
-    
-        line_bot_api.reply_message(event.reply_token, message)
-
-        #self.go_back()
-    def on_exit_taichung(self,event):
-        print("Leaving taichung")
-
-    def on_enter_tainan_food(self, event):
-        print("I'm entering tainan")
-
-        #reply_token = event.reply_token
-        #send_text_message(reply_token, "Now in tainan")
-
-        message = TextSendMessage(text='It is delicious in Tainan!!')
-        line_bot_api.reply_message(event.reply_token, message)
-
-        #self.go_back()
-    def on_exit_tainan_food(self, event):
-        print("Leaving tainan")
-
-    def on_enter_tainan_view(self, event):
-        print("I'm entering tainan")
-
-        #reply_token = event.reply_token
-        #send_text_message(reply_token, "Now in tainan")
-
-        message = TextSendMessage(text='It is fun in Tainan!!')
-        line_bot_api.reply_message(event.reply_token, message)
-
-        #self.go_back()
-    def on_exit_tainan_view(self, event):
-        print("Leaving tainan")
-
-    def on_enter_taichung_food(self, event):
-        print("I'm entering taichung")
-
-        #reply_token = event.reply_token
-        #send_text_message(reply_token, "Now in tainan")
-
-        message = TextSendMessage(text='It is delicious in taichung!!')
-        line_bot_api.reply_message(event.reply_token, message)
-
-        #self.go_back()
-    def on_exit_taichung_food(self, event):
-        print("Leaving taichung")
-
-    def on_enter_taichung_view(self, event):
-        print("I'm entering taichung")
-
-        #reply_token = event.reply_token
-        #send_text_message(reply_token, "Now in tainan")
-
-        message = TextSendMessage(text='It is fun in taichung!!')
-        line_bot_api.reply_message(event.reply_token, message)
-
-        #self.go_back()
-    def on_exit_taichung_view(self, event):
-        print("Leaving taichung")
+    def on_enter_add_player(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "Enter player number")
+        text = event.message.text
+        while isinstance(text, int) == False:
+            send_text_message(reply_token, "Enter player number")
+        self.success_add_player()
+        
+    def on_exit_add_player(self, event):
+        print("exit_add_player")
 
     def on_enter_exit(self, event):
         print("I'm entering state3")
-
         reply_token = event.reply_token
         send_text_message(reply_token, "Now exit")
         self.go_back()

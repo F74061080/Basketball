@@ -14,59 +14,28 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "start", "tainan", "taichung", "tainan_view", "tainan_food", "taichung_view", "taichung_food",  "exit"],
+    states=["user", "enter_player", "add_player", "exit"],
     transitions=[
         {
             "trigger": "advance", 
             "source": "user", 
-            "dest": "start",
-            "conditions": "is_going_to_start",
+            "dest": "enter_player",
+            "conditions": "is_going_to_enter_player",
         },
         {
-            "trigger": "advance",
-            "source": "start",
-            "dest": "tainan",
-            "conditions": "is_going_to_tainan",
+            "trigger": "advance", 
+            "source": "enter_player", 
+            "dest": "add_player",
+            "conditions": "is_going_to_add_player",
         },
         {
-            "trigger": "advance",
-            "source": "start",
-            "dest": "taichung",
-            "conditions": "is_going_to_taichung",
-        },
-        {
-            "trigger": "advance",
-            "source": "tainan",
-            "dest": "tainan_view",
-            "conditions": "is_going_to_tainan_view",
-        },
-        {
-            "trigger": "advance",
-            "source": "tainan",
-            "dest": "tainan_food",
-            "conditions": "is_going_to_tainan_food",
-        },
-        {
-            "trigger": "advance",
-            "source": "taichung",
-            "dest": "taichung_view",
-            "conditions": "is_going_to_taichung_view",
-        },
-        {
-            "trigger": "advance",
-            "source": "taichung",
-            "dest": "taichung_food",
-            "conditions": "is_going_to_taichung_food",
-        },
-        {
-            "trigger": "advance",
-            "source": ["tainan", "taichung", "tainan_view", "tainan_food", "taichung_view", "taichung_food"],
-            "dest": "exit",
-            "conditions": "is_going_to_exit",
+            "trigger": "success_add_player", 
+            "source": "add_player", 
+            "dest": "enter_player",
         },
         {
             "trigger": "go_back",
-            "source": ["start", "tainan", "taichung", "tainan_view", "tainan_food", "taichung_view", "taichung_food", "exit"],
+            "source": ["enter_player", "exit"],
             "dest": "user"
         },
     ],
