@@ -70,7 +70,7 @@ class TocMachine(GraphMachine):
             alt_text='Buttons template',
             template=ButtonsTemplate(
                 thumbnail_image_url='https://i.imgur.com/q2soQy5.jpg',
-                title='選擇服務',
+                title='選擇台南服務',
                 text='Please select',
                 actions=[
                     MessageAction(
@@ -96,8 +96,30 @@ class TocMachine(GraphMachine):
     def on_enter_taichung(self, event):
         print("I'm entering taichung")
 
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Now in taichung")
+        #reply_token = event.reply_token
+        #send_text_message(reply_token, "Now in taichung")
+
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://i.imgur.com/q2soQy5.jpg',
+                title='選擇台中服務',
+                text='Please select',
+                actions=[
+                    MessageAction(
+                        label='景點',
+                        text='Exit'
+                    ),
+                    MessageAction(
+                        label='美食',
+                        text='Exit'
+                    ),
+                ]
+            )
+        )
+    
+        line_bot_api.reply_message(event.reply_token, message)
+
         #self.go_back()
 
     def on_exit_taichung(self,event):
