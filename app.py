@@ -29,7 +29,7 @@ machine = TocMachine(
             "conditions": "is_going_to_add_player",
         },
         {
-            "trigger": "success_add_player", 
+            "trigger": "advance", 
             "source": "add_player", 
             "dest": "success_player",
             "conditions": "is_going_to_success_player"
