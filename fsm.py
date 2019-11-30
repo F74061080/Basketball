@@ -133,7 +133,6 @@ class TocMachine(GraphMachine):
         #send_text_message(reply_token, "Now in tainan")
 
         message = TextSendMessage(text='It is delicious in Tainan!!')
-    
         line_bot_api.reply_message(event.reply_token, message)
 
         #self.go_back()
@@ -147,7 +146,6 @@ class TocMachine(GraphMachine):
         #send_text_message(reply_token, "Now in tainan")
 
         message = TextSendMessage(text='It is fun in Tainan!!')
-    
         line_bot_api.reply_message(event.reply_token, message)
 
         #self.go_back()
@@ -174,7 +172,6 @@ class TocMachine(GraphMachine):
         #send_text_message(reply_token, "Now in tainan")
 
         message = TextSendMessage(text='It is fun in taichung!!')
-    
         line_bot_api.reply_message(event.reply_token, message)
 
         #self.go_back()
