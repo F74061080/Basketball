@@ -63,8 +63,30 @@ class TocMachine(GraphMachine):
     def on_enter_tainan(self, event):
         print("I'm entering tainan")
 
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Now in tainan")
+        #reply_token = event.reply_token
+        #send_text_message(reply_token, "Now in tainan")
+
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://i.imgur.com/q2soQy5.jpg',
+                title='選擇服務',
+                text='Please select',
+                actions=[
+                    MessageAction(
+                        label='景點',
+                        text='Exit'
+                    ),
+                    MessageAction(
+                        label='美食',
+                        text='Exit'
+                    ),
+                ]
+            )
+        )
+    
+        line_bot_api.reply_message(event.reply_token, message)
+
         #self.go_back()
 
     def on_exit_tainan(self, event):
