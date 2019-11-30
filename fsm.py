@@ -132,7 +132,7 @@ class TocMachine(GraphMachine):
         #reply_token = event.reply_token
         #send_text_message(reply_token, "Now in tainan")
 
-        message = TextSendMessage(text='It is delicious in Taichung!!')
+        message = TextSendMessage(text='It is delicious in Tainan!!')
     
         line_bot_api.reply_message(event.reply_token, message)
 
@@ -146,7 +146,7 @@ class TocMachine(GraphMachine):
         #reply_token = event.reply_token
         #send_text_message(reply_token, "Now in tainan")
 
-        message = TextSendMessage(text='It is delicious in Tainan!!')
+        message = TextSendMessage(text='It is fun in Tainan!!')
     
         line_bot_api.reply_message(event.reply_token, message)
 
@@ -154,7 +154,32 @@ class TocMachine(GraphMachine):
     def on_exit_tainan_view(self, event):
         print("Leaving tainan")
 
+    def on_enter_taichung_food(self, event):
+        print("I'm entering taichung")
 
+        #reply_token = event.reply_token
+        #send_text_message(reply_token, "Now in tainan")
+
+        message = TextSendMessage(text='It is delicious in taichung!!')
+        line_bot_api.reply_message(event.reply_token, message)
+
+        #self.go_back()
+    def on_exit_taichung_food(self, event):
+        print("Leaving taichung")
+
+    def on_enter_taichung_view(self, event):
+        print("I'm entering taichung")
+
+        #reply_token = event.reply_token
+        #send_text_message(reply_token, "Now in tainan")
+
+        message = TextSendMessage(text='It is fun in taichung!!')
+    
+        line_bot_api.reply_message(event.reply_token, message)
+
+        #self.go_back()
+    def on_exit_taichung_view(self, event):
+        print("Leaving taichung")
 
     def on_enter_exit(self, event):
         print("I'm entering state3")
