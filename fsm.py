@@ -38,6 +38,9 @@ class TocMachine(GraphMachine):
     def is_going_to_add_player(self, event):
         text = event.message.text
         return text.lower() == "add_player"
+    def is_going_to_success_player(self, event):
+        text = event.message.text
+        return isinstance(text, int) == True
     def is_going_to_exit(self, event):
         text = event.message.text
         return text.lower() == "exit"
@@ -70,13 +73,18 @@ class TocMachine(GraphMachine):
     def on_enter_add_player(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "Enter player number")
-        text = event.message.text
-        while isinstance(text, int) == False:
-            send_text_message(reply_token, "Enter player number")
-        self.success_add_player()
+        
         
     def on_exit_add_player(self, event):
         print("exit_add_player")
+
+    def on_enter_success_player(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "Success add player")
+        self.go_back()
+        
+    def on_exit_success_player(self, event):
+        print("exit_success_player")
 
     def on_enter_exit(self, event):
         print("I'm entering state3")
