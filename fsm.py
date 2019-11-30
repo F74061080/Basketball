@@ -35,6 +35,9 @@ class TocMachine(GraphMachine):
     def is_going_to_enter_player(self, event):
         text = event.message.text
         return text.lower() == "start"
+    def is_going_to_enter_player2(self, event):
+        text = event.message.text
+        return 1
     def is_going_to_add_player(self, event):
         text = event.message.text
         return text.lower() == "add_player"
@@ -67,6 +70,7 @@ class TocMachine(GraphMachine):
             )
         )
         line_bot_api.reply_message(event.reply_token, message)   
+
     def on_exit_enter_player(self, event):
         print("exit_enter_player")
 
@@ -83,7 +87,7 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token, "Success add player")
         self.go_back()
         
-    def on_exit_success_player(self):
+    def on_exit_success_player(self, event):
         print("exit_success_player")
 
     def on_enter_exit(self, event):

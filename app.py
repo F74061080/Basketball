@@ -36,9 +36,10 @@ machine = TocMachine(
         },
 
         {
-            "trigger": "go_back",
+            "trigger": "advance",
             "source": "success_player",
-            "dest": "enter_player"
+            "dest": "enter_player",
+            "conditions": "is_going_to_enter_player2",
         },
     ],
     initial="user",
