@@ -66,8 +66,8 @@ machine = TocMachine(
         },
         {
             "trigger": "go_back",
-            "source": ["tainan", "taichung", "tainan_view", "tainan_food", "taichung_view", "taichung_food", "exit"],
-            "dest": "start"
+            "source": ["start", "tainan", "taichung", "tainan_view", "tainan_food", "taichung_view", "taichung_food", "exit"],
+            "dest": "user"
         },
     ],
     initial="user",
