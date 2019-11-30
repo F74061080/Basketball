@@ -85,7 +85,6 @@ class TocMachine(GraphMachine):
     def on_enter_success_player(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "Success add player")
-        self.go_back()
         
     def on_exit_success_player(self, event):
         print("exit_success_player")
