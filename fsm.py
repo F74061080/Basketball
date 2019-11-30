@@ -40,7 +40,7 @@ class TocMachine(GraphMachine):
         return text.lower() == "add_player"
     def is_going_to_success_player(self, event):
         text = event.message.text
-        return isinstance(text, int) == True
+        return isinstance(text, str) == True
     def is_going_to_exit(self, event):
         text = event.message.text
         return text.lower() == "exit"
