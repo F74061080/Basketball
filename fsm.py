@@ -97,6 +97,10 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "drebound"
     
+    def is_going_to_assist(self, event):
+        text = event.message.text
+        return text.lower() == "assist"
+
     def gotit(self, event):
         text = event.message.text
         return isinstance(text, str) == True
@@ -460,3 +464,28 @@ class TocMachine(GraphMachine):
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_DRebound(self, event):
         print("exit_DRebound")
+
+    def on_enter_assist(self, event):
+        now = 0
+        for i in range(len(player_num)) :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
+                player_num[i].assist += 1
+                print(player_num[i].assist)
+                now = i
+        print("Number %d made assist %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].assist))
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                text="No.%d made %d assist" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].assist),
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, message)
+
+    def on_exit_DRebound(self, event):
+        print("exit_assist")
