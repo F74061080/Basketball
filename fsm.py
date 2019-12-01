@@ -59,9 +59,11 @@ class TocMachine(GraphMachine):
         return text.lower() == "twopt"
     def is_going_to_twoptmade(self, event):
         text = event.message.text
+        print(CurrentPlayer)
         return text.lower() == "twoptmade"
     def is_going_to_twoptmiss(self, event):
         text = event.message.text
+        print(CurrentPlayer)
         return text.lower() == "twoptmiss"
     def gotit(self, event):
         text = event.message.text
