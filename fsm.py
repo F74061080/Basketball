@@ -351,8 +351,20 @@ class TocMachine(GraphMachine):
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].DRebound += 1
                 print(player_num[i].DRebound)
-        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].DRebound))
-        message = TextSendMessage(text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].DRebound))
+        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, CurrentPlayer[len(CurrentPlayer)-1].DRebound))
+        #message = TextSendMessage(text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, CurrentPlayer[len(CurrentPlayer)-1].DRebound))
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, CurrentPlayer[len(CurrentPlayer)-1].DRebound),
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_DRebound(self, event):
         print("exit_DRebound")
