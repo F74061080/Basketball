@@ -179,6 +179,8 @@ class TocMachine(GraphMachine):
             if player_num[i].number == CurrentPlayer :
                 player_num[i].two_miss += 1
         print(player_num[0].number)
+        print(CurrentPlayer)
+        print(player_num[0].two_miss)
         message = TextSendMessage(text='Got_it')
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmiss(self, event):
