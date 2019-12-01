@@ -74,6 +74,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "exit"
 
+
     def on_enter_enter_player(self, event):
         print("Start to choose")
         #message = TextSendMessage(text='Enter player number')
