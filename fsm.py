@@ -63,7 +63,7 @@ class TocMachine(GraphMachine):
         return text.lower() == "twoptmiss"
     def gotit(self, event):
         text = event.message.text
-        return text == "Got_it"
+        return isinstance(text, str) == True
     def is_going_to_exit(self, event):
         text = event.message.text
         return text.lower() == "exit"
@@ -167,8 +167,20 @@ class TocMachine(GraphMachine):
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer :
                 player_num[i].two_made += 1
+                print(player_num[i].two_made)
         message = TextSendMessage(text='Got_it')
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmade(self, event):
         print("exit_twoptmade")
+
+    def on_enter_twoptmiss(self, event):
+        print("Start to choose") 
+        for i in range(len(player_num)) :
+            if player_num[i].number == CurrentPlayer :
+                player_num[i].two_miss += 1
+                print(player_num[i].two_miss)
+        message = TextSendMessage(text='Got_it')
+        line_bot_api.reply_message(event.reply_token, message)
+    def on_exit_twoptmiss(self, event):
+        print("exit_twoptmiss")
     

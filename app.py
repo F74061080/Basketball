@@ -73,7 +73,7 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": "twoptmade",
+            "source": ["twoptmade", "twoptmiss"],
             "dest": "enter_number",
             "conditions": "gotit",
         },
