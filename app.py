@@ -15,7 +15,7 @@ load_dotenv()
 
 machine = TocMachine(
     states=["user", "enter_player", "add_player", "success_player", "enter_number", "statistic",
-            "twopt", "threept", "freept", "Rebound", "assist",
+            "twopt", "threept", "freept", "Rebound",
             "twoptmade", "twoptmiss", 
             "threeptmade", "threeptmiss",
             "freeptmade", "freeptmiss",
@@ -132,13 +132,7 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": "statistic",
-            "dest": "assist",
-            "conditions": "is_going_to_assist",
-        },
-        {
-            "trigger": "advance",
-            "source": ["twoptmade", "twoptmiss", "threeptmade", "threeptmiss", "freeptmade", "freeptmiss", "ORebound", "DRebound", "assist"],
+            "source": ["twoptmade", "twoptmiss", "threeptmade", "threeptmiss", "freeptmade", "freeptmiss", "ORebound", "DRebound"],
             "dest": "enter_number",
             "conditions": "gotit",
         },
