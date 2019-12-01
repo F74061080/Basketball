@@ -107,6 +107,7 @@ class TocMachine(GraphMachine):
             alt_text='Buttons template',
             template=ButtonsTemplate(
                 title='安安你好',
+                text='Please select',
                 actions=[
                     MessageAction(
                         label='兩分球出手',
