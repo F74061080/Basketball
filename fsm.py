@@ -204,22 +204,48 @@ class TocMachine(GraphMachine):
         print("exit_twopt")
 
     def on_enter_twoptmade(self, event):
+        now = 0
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].two_made += 1
                 print(player_num[i].two_made)
-        print("Number %d made two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_made))
-        message = TextSendMessage(text="No.%d made %d 2pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_made))
+                now = i
+        print("Number %d made two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].two_made))
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                text="No.%d made %d 2pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].two_made),
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmade(self, event):
         print("exit_twoptmade")
 
     def on_enter_twoptmiss(self, event):
+        now = 0
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].two_miss += 1
-        print("Number %d miss two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_miss))
-        message = TextSendMessage(text="No.%d miss %d 2pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_miss))
+                now = i
+        print("Number %d miss two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].two_miss))
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                text="No.%d miss %d 2pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].two_miss),
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmiss(self, event):
         print("exit_twoptmiss")
@@ -248,22 +274,48 @@ class TocMachine(GraphMachine):
         print("exit_threept")
 
     def on_enter_threeptmade(self, event):
+        now = 0
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].three_made += 1
                 print(player_num[i].three_made)
-        print("Number %d made three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_made))
-        message = TextSendMessage(text="No.%d made %d 3pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_made))
+                now = i
+        print("Number %d made three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].three_made))
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                text="No.%d miss %d 3pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].three_made),
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_threeptmade(self, event):
         print("exit_threeptmade")
 
     def on_enter_threeptmiss(self, event):
+        now = 0
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].three_miss += 1
-        print("Number %d miss three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_miss))
-        message = TextSendMessage(text="No.%d miss %d 3pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_miss))
+                now = i
+        print("Number %d miss three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].three_miss))
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                text="No.%d miss %d 3pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].three_miss),
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_threeptmiss(self, event):
         print("exit_threeptmiss")
@@ -292,22 +344,48 @@ class TocMachine(GraphMachine):
         print("exit_freept")
 
     def on_enter_freeptmade(self, event):
+        now = 0
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].free_made += 1
+                now = i
                 print(player_num[i].free_made)
-        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].free_made))
-        message = TextSendMessage(text="No.%d made %d 1pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].free_made))
+        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].free_made))
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                text="No.%d made %d 1pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].free_made),
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_freeptmade(self, event):
         print("exit_freeptmade")
 
     def on_enter_freeptmiss(self, event):
+        now = 0
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].free_miss += 1
-        print("Number %d miss free %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].free_miss))
-        message = TextSendMessage(text="No.%d miss %d 1pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].free_miss))
+                now = i
+        print("Number %d miss free %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].free_miss))
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                text="No.%d miss %d 1pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].free_miss),
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_freeptmiss(self, event):
         print("exit_freeptmiss")
@@ -336,12 +414,25 @@ class TocMachine(GraphMachine):
         print("exit_Rebound")
     
     def on_enter_ORebound(self, event):
+        now = 0
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].ORebound += 1
                 print(player_num[i].ORebound)
-        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].ORebound))
-        message = TextSendMessage(text="No.%d made %d OReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[CurrentPlayer[len(CurrentPlayer)-1].number].ORebound))
+                now = i
+        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].ORebound))
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                text="No.%d made %d OReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].ORebound),
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_ORebound(self, event):
         print("exit_ORebound")
@@ -354,7 +445,6 @@ class TocMachine(GraphMachine):
                 print(player_num[i].DRebound)
                 now = i
         print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].DRebound))
-        #message = TextSendMessage(text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].DRebound))
         message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
