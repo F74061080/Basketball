@@ -133,9 +133,9 @@ class TocMachine(GraphMachine):
         #message = TextSendMessage(text='Enter player number')
         #line_bot_api.reply_message(event.reply_token, message)
         message = TemplateSendMessage(
-            alt_text='Buttons template',
+            alt_text='Confirm template',
             template=ConfirmTemplate(
-                alt_text='選擇是否命中',
+                text='選擇是否命中',
                 actions=[
                     MessageAction(
                         label='命中',
