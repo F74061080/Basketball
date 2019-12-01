@@ -136,8 +136,19 @@ class TocMachine(GraphMachine):
         print("exit_add_player")
 
     def on_enter_success_player(self, event):
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Enter anything to next")     
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                text='Success',
+                actions=[
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, message)    
     def on_exit_success_player(self, event):
         print("exit_success_player")
 
