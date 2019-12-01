@@ -356,14 +356,10 @@ class TocMachine(GraphMachine):
         print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].DRebound))
         #message = TextSendMessage(text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].DRebound))
         message = TemplateSendMessage(
-            alt_text='Confirm template',
-            template=ConfirmTemplate(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
                 text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].DRebound),
                 actions=[
-                    MessageAction(
-                        label='check',
-                        text='check'
-                    ),
                     MessageAction(
                         label='check',
                         text='check'
