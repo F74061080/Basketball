@@ -364,6 +364,10 @@ class TocMachine(GraphMachine):
                         label='check',
                         text='check'
                     ),
+                    MessageAction(
+                        label='check',
+                        text='check'
+                    ),
                 ]
             )
         )
