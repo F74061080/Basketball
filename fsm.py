@@ -160,12 +160,12 @@ class TocMachine(GraphMachine):
 
     def on_enter_twoptmade(self, event):
         print("Start to choose")
-        #message = TextSendMessage(text='Enter player number')
-        #line_bot_api.reply_message(event.reply_token, message)
+        message = TextSendMessage(text='Got it')
+        line_bot_api.reply_message(event.reply_token, message)
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer :
                 player_num[i].two_made += 1
         self.go_back()
-    def on_exit_twoptmade(self):
+    def on_exit_twoptmade(self, event):
         print("exit_twoptmade")
     
