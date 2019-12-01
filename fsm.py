@@ -52,6 +52,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         CurrentPlayer = int(text)
         print(text)
+        print(CurrentPlayer)
         return isinstance(text, str) == True 
     def is_going_to_twopt(self, event):
         text = event.message.text
