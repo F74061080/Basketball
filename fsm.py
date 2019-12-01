@@ -26,8 +26,12 @@ class player():
         self.error      = 0
         self.foul       = 0
 
+class Cplayer():
+    def __init__(self, num):
+        self.number = int(num)  
+
 player_num = []
-CurrentPlayer = int
+CurrentPlayer = []
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -50,20 +54,18 @@ class TocMachine(GraphMachine):
         return text.lower() == "game"
     def is_going_to_statistic(self, event):
         text = event.message.text
-        CurrentPlayer = int(text)
+        CurrentPlayer.append(Cplayer(text))
         print(text)
-        print(CurrentPlayer)
+        print(CurrentPlayer[len(CurrentPlayer)-1].number)
         return isinstance(text, str) == True 
     def is_going_to_twopt(self, event):
         text = event.message.text
         return text.lower() == "twopt"
     def is_going_to_twoptmade(self, event):
         text = event.message.text
-        print(CurrentPlayer)
         return text.lower() == "twoptmade"
     def is_going_to_twoptmiss(self, event):
         text = event.message.text
-        print(CurrentPlayer)
         return text.lower() == "twoptmiss"
     def gotit(self, event):
         text = event.message.text
@@ -169,7 +171,7 @@ class TocMachine(GraphMachine):
     def on_enter_twoptmade(self, event):
         print("Start to choose") 
         for i in range(len(player_num)) :
-            if player_num[i].number == CurrentPlayer :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].two_made += 1
                 print(player_num[i].two_made)
         message = TextSendMessage(text='Got_it')
@@ -180,10 +182,10 @@ class TocMachine(GraphMachine):
     def on_enter_twoptmiss(self, event):
         print("Start to choose") 
         for i in range(len(player_num)) :
-            if player_num[i].number == CurrentPlayer :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].two_miss += 1
         print(player_num[0].number)
-        print(CurrentPlayer)
+        print(CurrentPlayer[len(CurrentPlayer)-1].number)
         print(player_num[0].two_miss)
         message = TextSendMessage(text='Got_it')
         line_bot_api.reply_message(event.reply_token, message)
