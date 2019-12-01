@@ -15,10 +15,12 @@ load_dotenv()
 
 machine = TocMachine(
     states=["user", "enter_player", "add_player", "success_player", "enter_number", "statistic",
-            "twopt", "threept", "freept",
+            "twopt", "threept", "freept", "Rebound",
             "twoptmade", "twoptmiss", 
             "threeptmade", "threeptmiss",
-            "freeptmade", "freeptmiss"],
+            "freeptmade", "freeptmiss",
+            "ORebound", "DRebound",
+            ],
     transitions=[
         {
             "trigger": "advance", 
@@ -112,7 +114,25 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["twoptmade", "twoptmiss", "threeptmade", "threeptmiss", "freeptmade", "freeptmiss"],
+            "source": "statistic",
+            "dest": "Rebound",
+            "conditions": "is_going_to_Rebound",
+        },
+        {
+            "trigger": "advance",
+            "source": "Rebound",
+            "dest": "ORebound",
+            "conditions": "is_going_to_ORebound",
+        },
+        {
+            "trigger": "advance",
+            "source": "Rebound",
+            "dest": "DRebound",
+            "conditions": "is_going_to_DRebound",
+        },
+        {
+            "trigger": "advance",
+            "source": ["twoptmade", "twoptmiss", "threeptmade", "threeptmiss", "freeptmade", "freeptmiss", "ORebound", "DRebound"],
             "dest": "enter_number",
             "conditions": "gotit",
         },

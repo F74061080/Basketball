@@ -87,6 +87,16 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "freeptmiss"
 
+    def is_going_to_Rebound(self, event):
+        text = event.message.text
+        return text.lower() == "rebound"
+    def is_going_to_ORebound(self, event):
+        text = event.message.text
+        return text.lower() == "orebound"
+    def is_going_to_DRebound(self, event):
+        text = event.message.text
+        return text.lower() == "drebound"
+    
     def gotit(self, event):
         text = event.message.text
         return isinstance(text, str) == True
@@ -158,6 +168,11 @@ class TocMachine(GraphMachine):
                         label='罰球出手',
                         text='freept'
                     ),
+                    MessageAction(
+                        label='籃板球',
+                        text='rebound'
+                    ),
+
                 ]
             )
         )
@@ -296,3 +311,48 @@ class TocMachine(GraphMachine):
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_freeptmiss(self, event):
         print("exit_freeptmiss")
+
+    def on_enter_Rebound(self, event):
+        #message = TextSendMessage(text='Enter player number')
+        #line_bot_api.reply_message(event.reply_token, message)
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='選擇籃板種類',
+                actions=[
+                    MessageAction(
+                        label='進攻籃板',
+                        text='orebound'
+                    ),
+                    MessageAction(
+                        label='防守籃板',
+                        text='drebound'
+                    ),
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, message)
+    def on_exit_Rebound(self, event):
+        print("exit_Rebound")
+    
+    def on_enter_ORebound(self, event):
+        for i in range(len(player_num)) :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
+                player_num[i].ORebound += 1
+                print(player_num[i].ORebound)
+        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].ORebound))
+        message = TextSendMessage(text="No.%d made %d OReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].ORebound))
+        line_bot_api.reply_message(event.reply_token, message)
+    def on_exit_ORebound(self, event):
+        print("exit_ORebound")
+
+    def on_enter_DRebound(self, event):
+        for i in range(len(player_num)) :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
+                player_num[i].DRebound += 1
+                print(player_num[i].DRebound)
+        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].DRebound))
+        message = TextSendMessage(text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].DRebound))
+        line_bot_api.reply_message(event.reply_token, message)
+    def on_exit_DRebound(self, event):
+        print("exit_DRebound")
