@@ -14,7 +14,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "enter_player", "add_player", "success_player", "exit"],
+    states=["user", "enter_player", "add_player", "success_player", "enter_number", "statistic"],
     transitions=[
         {
             "trigger": "advance", 
@@ -34,12 +34,23 @@ machine = TocMachine(
             "dest": "success_player",
             "conditions": "is_going_to_success_player"
         },
-
         {
             "trigger": "advance",
             "source": "success_player",
             "dest": "enter_player",
             "conditions": "is_going_to_enter_player2",
+        },
+        {
+            "trigger": "advance",
+            "source": "enter_player",
+            "dest": "enter_number",
+            "conditions": "is_going_to_enter_number",
+        },
+        {
+            "trigger": "advance",
+            "source": "enter_number",
+            "dest": "statistic",
+            "conditions": "is_going_to_statistic",
         },
     ],
     initial="user",
