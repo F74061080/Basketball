@@ -183,6 +183,7 @@ class TocMachine(GraphMachine):
         print(player_num[0].number)
         print(CurrentPlayer)
         print(player_num[0].two_miss)
+        print(player_num[1].number)
         message = TextSendMessage(text='Got_it')
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmiss(self, event):
