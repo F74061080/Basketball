@@ -166,6 +166,6 @@ class TocMachine(GraphMachine):
             if player_num[i].number == CurrentPlayer :
                 player_num[i].two_made += 1
         self.go_back()
-    def on_exit_twoptmade(self, event):
+    def on_exit_twoptmade(self):
         print("exit_twoptmade")
     
