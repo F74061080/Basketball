@@ -55,9 +55,8 @@ class TocMachine(GraphMachine):
     def is_going_to_statistic(self, event):
         text = event.message.text
         CurrentPlayer.append(Cplayer(text))
-        print(text)
-        print(CurrentPlayer[len(CurrentPlayer)-1].number)
         return isinstance(text, str) == True 
+
     def is_going_to_twopt(self, event):
         text = event.message.text
         return text.lower() == "twopt"
@@ -67,6 +66,17 @@ class TocMachine(GraphMachine):
     def is_going_to_twoptmiss(self, event):
         text = event.message.text
         return text.lower() == "twoptmiss"
+
+    def is_going_to_threept(self, event):
+        text = event.message.text
+        return text.lower() == "threept"
+    def is_going_to_threeptmade(self, event):
+        text = event.message.text
+        return text.lower() == "threeptmade"
+    def is_going_to_threeptmiss(self, event):
+        text = event.message.text
+        return text.lower() == "threeptmiss"
+
     def gotit(self, event):
         text = event.message.text
         return isinstance(text, str) == True
@@ -76,7 +86,6 @@ class TocMachine(GraphMachine):
 
 
     def on_enter_enter_player(self, event):
-        print("Start to choose")
         #message = TextSendMessage(text='Enter player number')
         #line_bot_api.reply_message(event.reply_token, message)
         message = TemplateSendMessage(
@@ -113,14 +122,12 @@ class TocMachine(GraphMachine):
         print("exit_success_player")
 
     def on_enter_enter_number(self, event):
-        print("Start to choose")
         message = TextSendMessage(text='Enter player number')
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_enter_number(self, event):
         print("exit_enter_number")
 
     def on_enter_statistic(self, event):
-        print("Start to choose")
         #message = TextSendMessage(text='Enter player number')
         #line_bot_api.reply_message(event.reply_token, message)
         message = TemplateSendMessage(
@@ -144,9 +151,7 @@ class TocMachine(GraphMachine):
     def on_exit_statistic(self, event):
         print("exit_statistic")
 
-
     def on_enter_twopt(self, event):
-        print("Start to choose")
         #message = TextSendMessage(text='Enter player number')
         #line_bot_api.reply_message(event.reply_token, message)
         message = TemplateSendMessage(
@@ -170,25 +175,66 @@ class TocMachine(GraphMachine):
         print("exit_twopt")
 
     def on_enter_twoptmade(self, event):
-        print("Start to choose") 
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].two_made += 1
                 print(player_num[i].two_made)
         print("Number %d made two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_made))
-        message = TextSendMessage(text='Got_it')
+        message = TextSendMessage(text="Number %d made two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_made))
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmade(self, event):
         print("exit_twoptmade")
 
     def on_enter_twoptmiss(self, event):
-        print("Start to choose") 
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].two_miss += 1
         print("Number %d miss two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_miss))
-        message = TextSendMessage(text='Got_it')
+        message = TextSendMessage(text="Number %d miss two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_miss))
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmiss(self, event):
         print("exit_twoptmiss")
     
+    def on_enter_threept(self, event):
+        #message = TextSendMessage(text='Enter player number')
+        #line_bot_api.reply_message(event.reply_token, message)
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='選擇是否命中',
+                actions=[
+                    MessageAction(
+                        label='命中',
+                        text='threeptmade'
+                    ),
+                    MessageAction(
+                        label='未命中',
+                        text='threeptmiss'
+                    ),
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, message)   
+    def on_exit_threept(self, event):
+        print("exit_threept")
+
+    def on_enter_threeptmade(self, event):
+        for i in range(len(player_num)) :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
+                player_num[i].three_made += 1
+                print(player_num[i].three_made)
+        print("Number %d made three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_made))
+        message = TextSendMessage(text="Number %d made three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_made))
+        line_bot_api.reply_message(event.reply_token, message)
+    def on_exit_twoptmade(self, event):
+        print("exit_threeptmade")
+
+    def on_enter_threeptmiss(self, event):
+        for i in range(len(player_num)) :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
+                player_num[i].three_miss += 1
+        print("Number %d miss three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_miss))
+        message = TextSendMessage(text="Number %d miss three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_miss))
+        line_bot_api.reply_message(event.reply_token, message)
+    def on_exit_twoptmiss(self, event):
+        print("exit_threeptmiss")

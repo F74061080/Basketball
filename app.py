@@ -73,7 +73,25 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["twoptmade", "twoptmiss"],
+            "source": "statistic",
+            "dest": "threept",
+            "conditions": "is_going_to_threept",
+        },
+        {
+            "trigger": "advance",
+            "source": "threept",
+            "dest": "threeptmade",
+            "conditions": "is_going_to_threeptmade",
+        },
+        {
+            "trigger": "advance",
+            "source": "threept",
+            "dest": "threeptmiss",
+            "conditions": "is_going_to_threeptmiss",
+        },
+        {
+            "trigger": "advance",
+            "source": ["twoptmade", "twoptmiss", "threemade", "threemiss"],
             "dest": "enter_number",
             "conditions": "gotit",
         },
