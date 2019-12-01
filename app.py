@@ -72,9 +72,10 @@ machine = TocMachine(
             "conditions": "is_going_to_twoptmiss",
         },
         {
-            "trigger": "go_back",
+            "trigger": "advance",
             "source": "twoptmade",
             "dest": "enter_number",
+            "conditions": "gotit",
         },
     ],
     initial="user",
