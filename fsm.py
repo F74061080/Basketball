@@ -137,6 +137,7 @@ class TocMachine(GraphMachine):
     def on_exit_statistic(self, event):
         print("exit_statistic")
 
+
     def on_enter_twopt(self, event):
         print("Start to choose")
         #message = TextSendMessage(text='Enter player number')
