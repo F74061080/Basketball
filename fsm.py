@@ -347,16 +347,18 @@ class TocMachine(GraphMachine):
         print("exit_ORebound")
 
     def on_enter_DRebound(self, event):
+        now = 0
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].DRebound += 1
                 print(player_num[i].DRebound)
-        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, CurrentPlayer[len(CurrentPlayer)-1].DRebound))
-        #message = TextSendMessage(text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, CurrentPlayer[len(CurrentPlayer)-1].DRebound))
+                now = i
+        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].DRebound))
+        #message = TextSendMessage(text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].DRebound))
         message = TemplateSendMessage(
             alt_text='Confirm template',
             template=ConfirmTemplate(
-                text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[CurrentPlayer[len(CurrentPlayer)-1].number].ORebound),
+                text="No.%d made %d DReb" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[now].DRebound),
                 actions=[
                     MessageAction(
                         label='check',
