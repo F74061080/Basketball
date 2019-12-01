@@ -77,6 +77,16 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "threeptmiss"
 
+    def is_going_to_freept(self, event):
+        text = event.message.text
+        return text.lower() == "freept"
+    def is_going_to_freeptmade(self, event):
+        text = event.message.text
+        return text.lower() == "freeptmade"
+    def is_going_to_freeptmiss(self, event):
+        text = event.message.text
+        return text.lower() == "freeptmiss"
+
     def gotit(self, event):
         text = event.message.text
         return isinstance(text, str) == True
@@ -180,7 +190,7 @@ class TocMachine(GraphMachine):
                 player_num[i].two_made += 1
                 print(player_num[i].two_made)
         print("Number %d made two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_made))
-        message = TextSendMessage(text="Number %d made two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_made))
+        message = TextSendMessage(text="No.%d made %d 2pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_made))
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmade(self, event):
         print("exit_twoptmade")
@@ -190,7 +200,7 @@ class TocMachine(GraphMachine):
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].two_miss += 1
         print("Number %d miss two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_miss))
-        message = TextSendMessage(text="Number %d miss two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_miss))
+        message = TextSendMessage(text="No.%d miss %d 2pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_miss))
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmiss(self, event):
         print("exit_twoptmiss")
@@ -224,9 +234,9 @@ class TocMachine(GraphMachine):
                 player_num[i].three_made += 1
                 print(player_num[i].three_made)
         print("Number %d made three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_made))
-        message = TextSendMessage(text="Number %d made three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_made))
+        message = TextSendMessage(text="No.%d made %d 3pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_made))
         line_bot_api.reply_message(event.reply_token, message)
-    def on_exit_twoptmade(self, event):
+    def on_exit_threeptmade(self, event):
         print("exit_threeptmade")
 
     def on_enter_threeptmiss(self, event):
@@ -234,7 +244,51 @@ class TocMachine(GraphMachine):
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].three_miss += 1
         print("Number %d miss three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_miss))
-        message = TextSendMessage(text="Number %d miss three %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_miss))
+        message = TextSendMessage(text="No.%d miss %d 3pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].three_miss))
         line_bot_api.reply_message(event.reply_token, message)
-    def on_exit_twoptmiss(self, event):
+    def on_exit_threeptmiss(self, event):
         print("exit_threeptmiss")
+    
+    def on_enter_freept(self, event):
+        #message = TextSendMessage(text='Enter player number')
+        #line_bot_api.reply_message(event.reply_token, message)
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='選擇是否命中',
+                actions=[
+                    MessageAction(
+                        label='命中',
+                        text='freeptmade'
+                    ),
+                    MessageAction(
+                        label='未命中',
+                        text='freeptmiss'
+                    ),
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, message)   
+    def on_exit_freept(self, event):
+        print("exit_freept")
+
+    def on_enter_freeptmade(self, event):
+        for i in range(len(player_num)) :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
+                player_num[i].free_made += 1
+                print(player_num[i].free_made)
+        print("Number %d made one %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].free_made))
+        message = TextSendMessage(text="No.%d made %d 1pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].free_made))
+        line_bot_api.reply_message(event.reply_token, message)
+    def on_exit_freeptmade(self, event):
+        print("exit_freeptmade")
+
+    def on_enter_freeptmiss(self, event):
+        for i in range(len(player_num)) :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
+                player_num[i].free_miss += 1
+        print("Number %d miss free %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].free_miss))
+        message = TextSendMessage(text="No.%d miss %d 1pt" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].free_miss))
+        line_bot_api.reply_message(event.reply_token, message)
+    def on_exit_freeptmiss(self, event):
+        print("exit_freeptmiss")
