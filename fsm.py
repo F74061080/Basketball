@@ -3,7 +3,7 @@ from transitions.extensions import GraphMachine
 from utils import send_text_message
 from linebot import *
 from linebot.models.send_messages import TextSendMessage
-from linebot.models.template import ButtonsTemplate, TemplateSendMessage
+from linebot.models.template import ButtonsTemplate, ConfirmTemplate, TemplateSendMessage
 from linebot.models.actions import MessageAction, PostbackAction, URIAction
 
 line_bot_api = LineBotApi("nAOGBdhTa49RFIeaNBZzwFidsSGSd75vgCTo9lkhfndEsG2n58/CPw+oxHqqGMaplpxEzLDGhVtl2J9Hv4MLVbO/erT2WdA5pH0//GzukgUAhvAfxLUAFugC6tG2FNIQuOZJMiu9g8SHRid6yV6zKgdB04t89/1O/w1cDnyilFU=")
@@ -27,11 +27,11 @@ class player():
         self.foul       = 0
 
 player_num = []
+CurrentPlayer = 0
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
-
     def is_going_to_enter_player(self, event):
         text = event.message.text
         return text.lower() == "start"
@@ -50,7 +50,12 @@ class TocMachine(GraphMachine):
         return text.lower() == "game"
     def is_going_to_statistic(self, event):
         text = event.message.text
+        CurrentPlayer = int(text)
         return isinstance(text, str) == True 
+    def is_going_to_twopt(self, event):
+        text = event.message.text
+        CurrentPlayer = int(text)
+        return text.lower() == "twopt"
     def is_going_to_exit(self, event):
         text = event.message.text
         return text.lower() == "exit"
@@ -123,3 +128,29 @@ class TocMachine(GraphMachine):
         line_bot_api.reply_message(event.reply_token, message)   
     def on_exit_statistic(self, event):
         print("exit_statistic")
+
+    def on_enter_twopt(self, event):
+        print("Start to choose")
+        #message = TextSendMessage(text='Enter player number')
+        #line_bot_api.reply_message(event.reply_token, message)
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ConfirmTemplate(
+                alt_text='選擇是否命中',
+                actions=[
+                    MessageAction(
+                        label='命中',
+                        text='twoptmade'
+                    ),
+                    MessageAction(
+                        label='未命中',
+                        text='threeptmade'
+                    ),
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, message)   
+    def on_exit_twopt(self, event):
+        print("exit_twopt")
+
+    
