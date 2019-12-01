@@ -162,7 +162,7 @@ class TocMachine(GraphMachine):
         print("Start to choose")
         #message = TextSendMessage(text='Enter player number')
         #line_bot_api.reply_message(event.reply_token, message)
-        for i in len(player_num) :
+        for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer :
                 player_num[i].two_made += 1
         self.go_back()
