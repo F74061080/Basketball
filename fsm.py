@@ -176,6 +176,10 @@ class TocMachine(GraphMachine):
                         label='籃板球',
                         text='rebound'
                     ),
+                    MessageAction(
+                        label='助攻',
+                        text='assist'
+                    ),
 
                 ]
             )
@@ -486,6 +490,5 @@ class TocMachine(GraphMachine):
             )
         )
         line_bot_api.reply_message(event.reply_token, message)
-
-    def on_exit_DRebound(self, event):
+    def on_exit_assist(self, event):
         print("exit_assist")
