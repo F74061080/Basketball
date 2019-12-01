@@ -55,6 +55,12 @@ class TocMachine(GraphMachine):
     def is_going_to_twopt(self, event):
         text = event.message.text
         return text.lower() == "twopt"
+    def is_going_to_twoptmade(self, event):
+        text = event.message.text
+        return text.lower() == "twoptmade"
+    def is_going_to_twoptmiss(self, event):
+        text = event.message.text
+        return text.lower() == "twoptmiss"
     def is_going_to_exit(self, event):
         text = event.message.text
         return text.lower() == "exit"
@@ -143,7 +149,7 @@ class TocMachine(GraphMachine):
                     ),
                     MessageAction(
                         label='未命中',
-                        text='threeptmade'
+                        text='twoptmiss'
                     ),
                 ]
             )
@@ -152,4 +158,14 @@ class TocMachine(GraphMachine):
     def on_exit_twopt(self, event):
         print("exit_twopt")
 
+    def on_enter_twoptmade(self, event):
+        print("Start to choose")
+        #message = TextSendMessage(text='Enter player number')
+        #line_bot_api.reply_message(event.reply_token, message)
+        for i in len(player_num) :
+            if player_num[i].number == CurrentPlayer :
+                player_num[i].two_made += 1
+        self.go_back()
+    def on_exit_twoptmade(self, event):
+        print("exit_twoptmade")
     
