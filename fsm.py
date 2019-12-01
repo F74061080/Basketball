@@ -37,13 +37,13 @@ class TocMachine(GraphMachine):
         return text.lower() == "start"
     def is_going_to_enter_player2(self, event):
         text = event.message.text
-        player_num.append(player(text))
         return 1
     def is_going_to_add_player(self, event):
         text = event.message.text
         return text.lower() == "add_player"
     def is_going_to_success_player(self, event):
         text = event.message.text
+        player_num.append(player(text))
         return isinstance(text, str) == True
     def is_going_to_enter_number(self, event):
         text = event.message.text
