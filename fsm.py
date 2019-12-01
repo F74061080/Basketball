@@ -51,6 +51,7 @@ class TocMachine(GraphMachine):
     def is_going_to_statistic(self, event):
         text = event.message.text
         CurrentPlayer = int(text)
+        print(text)
         return isinstance(text, str) == True 
     def is_going_to_twopt(self, event):
         text = event.message.text
