@@ -175,6 +175,7 @@ class TocMachine(GraphMachine):
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].two_made += 1
                 print(player_num[i].two_made)
+        print("Number %d made two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_made))
         message = TextSendMessage(text='Got_it')
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmade(self, event):
@@ -185,9 +186,7 @@ class TocMachine(GraphMachine):
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
                 player_num[i].two_miss += 1
-        print(player_num[0].number)
-        print(CurrentPlayer[len(CurrentPlayer)-1].number)
-        print(player_num[0].two_miss)
+        print("Number %d miss two %d times" %(CurrentPlayer[len(CurrentPlayer)-1].number, player_num[0].two_miss))
         message = TextSendMessage(text='Got_it')
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_twoptmiss(self, event):
