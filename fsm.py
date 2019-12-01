@@ -154,6 +154,10 @@ class TocMachine(GraphMachine):
                         label='三分球出手',
                         text='threept'
                     ),
+                    MessageAction(
+                        label='罰球出手',
+                        text='freept'
+                    ),
                 ]
             )
         )
