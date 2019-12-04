@@ -20,6 +20,7 @@ machine = TocMachine(
             "threeptmade", "threeptmiss",
             "freeptmade", "freeptmiss",
             "ORebound", "DRebound",
+            "show",
             ],
     transitions=[
         {
@@ -132,9 +133,21 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["twoptmade", "twoptmiss", "threeptmade", "threeptmiss", "freeptmade", "freeptmiss", "ORebound", "DRebound"],
-            "dest": "enter_number",
+            "source": "statistic",
+            "dest": "show",
+            "conditions": "is_going_to_show",
+        },
+        {
+            "trigger": "advance",
+            "source": ["statistic", "twopt", "threept", "freept", "Rebound", "twoptmade", "twoptmiss",  "threeptmade", "threeptmiss", "freeptmade", "freeptmiss", "ORebound", "DRebound", "show"], 
+            "dest": "enter_player",
             "conditions": "gotit",
+        },
+        {
+            "trigger": "advance",
+            "source": ["statistic", "twopt", "threept", "freept", "Rebound", "twoptmade", "twoptmiss",  "threeptmade", "threeptmiss", "freeptmade", "freeptmiss", "ORebound", "DRebound", "show"], 
+            "dest": "enter_player",
+            "conditions": "clear",
         },
     ],
     initial="user",

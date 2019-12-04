@@ -20,11 +20,7 @@ class player():
         self.free_miss  = 0
         self.ORebound   = 0
         self.DRebound   = 0
-        self.assist     = 0
-        self.steal      = 0
-        self.block      = 0
-        self.error      = 0
-        self.foul       = 0
+
 
 class Cplayer():
     def __init__(self, num):
@@ -97,9 +93,17 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "drebound"
 
+    def is_going_to_show(self, event):
+        text = event.message.text
+        return text.lower() == "show"
+
     def gotit(self, event):
         text = event.message.text
-        return isinstance(text, str) == True
+        return text.lower() == "check"
+    def clear(self, event):
+        text = event.message.text
+        player_num = []
+        return text.lower() == "restart"    
     def is_going_to_exit(self, event):
         text = event.message.text
         return text.lower() == "exit"
@@ -470,4 +474,15 @@ class TocMachine(GraphMachine):
         line_bot_api.reply_message(event.reply_token, message)
     def on_exit_DRebound(self, event):
         print("exit_DRebound")
-        print("exit_assist")
+
+    def on_enter_show(self, event):
+        now = 0
+        for i in range(len(player_num)) :
+            if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :
+                now = i
+        message = TextSendMessage(text='No.%d:\n2pt:%d-%d\n3pt%d-%d\n1pt%d-%d\nReb%d-%d' %(player_num[now].number,player_num[now].two_made,player_num[now].two_miss,player_num[now].three_made,player_num[now].three_miss,player_num[now].free_made,player_num[now].free_miss,player_num[now].ORebound,player_num[now].DRebound))
+        line_bot_api.reply_message(event.reply_token, message)
+    def on_exit_show(self, event):
+        print("exit_show")
+
+    
