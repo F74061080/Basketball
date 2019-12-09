@@ -79,11 +79,23 @@ The initial state is set to `user`.
 Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
 
 * user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
-
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+	* Input: "start"
+		* 進入選單: 
+			* 增加球員
+				* Enter player number
+					* 輸入成功 -> 確認按鈕 -> 回到 "start"
+			* 開始比賽
+				* Enter player number
+					* 兩分球出手
+						* 按鈕選擇是否命中 -> 確認按鈕 -> 回到 "start"
+					* 三分球出手
+						* 按鈕選擇是否命中 -> 確認按鈕 -> 回到 "start"
+					* 罰球出手
+						* 按鈕選擇是否命中 -> 確認按鈕 -> 回到 "start"
+					* 籃板球
+						* 選擇進攻或防守籃板 -> 確認按鈕 -> 回到 "start"
+					* 輸入 "show" 可察看球員目前數據 -> 輸入 "check" -> 回到 "start"
+					* 輸入 "restart" 即可重製數據
 
 ## Deploy
 Setting to deploy webhooks on Heroku.
