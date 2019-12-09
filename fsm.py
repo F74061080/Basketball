@@ -476,6 +476,7 @@ class TocMachine(GraphMachine):
         print("exit_DRebound")
 
     def on_enter_show(self, event):
+        
         now = 0
         for i in range(len(player_num)) :
             if player_num[i].number == CurrentPlayer[len(CurrentPlayer)-1].number :

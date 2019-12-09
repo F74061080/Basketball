@@ -12,6 +12,7 @@ from utils import send_text_message
 
 load_dotenv()
 
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
 
 machine = TocMachine(
     states=["user", "enter_player", "add_player", "success_player", "enter_number", "statistic",
